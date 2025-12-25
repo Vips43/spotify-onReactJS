@@ -1,0 +1,89 @@
+@import "tailwindcss";
+* {
+ box-sizing: border-box;
+}
+
+.grcen {
+ @apply grid place-items-center;
+}
+.navIcon {
+ @apply w-12 h-12 text-2xl rounded-full grid place-items-center cursor-pointer hover:text-white transition-all duration-300 delay-100;
+}
+
+.maroon-gradient-dark {
+ background-image: linear-gradient(to bottom, #380202, #070000, #000000);
+}
+.play-mask {
+ width: 24px;
+ height: 24px;
+ background-color: rgb(180, 180, 180);
+ -webkit-mask: url("./icon-hover.svg") no-repeat center;
+ transition: all 0.5s ease-in-out;
+}
+.play-mask:hover {
+ mask: url("./icon-normal.svg") no-repeat center;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+ width: 10px; /* Width for vertical scrollbar */
+ height: 10px; /* Height for horizontal scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+ background: #f1f1f1; /* Light track color */
+ border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+ background: #888; /* Darker thumb color */
+ border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+ background: #555;
+}
+
+/* For Firefox */
+.custom-scrollbar {
+ scrollbar-width: thin; /* "auto" or "thin" */
+ scrollbar-color: #888 #f1f1f1; /* thumb color track color */
+}
+.scrollbar-hide::-webkit-scrollbar {
+ display: none;
+}
+
+.swiper {
+ width: 100%;
+ height: 100%;
+}
+.swiper-slide:hover{
+    background-color: #202020d8;
+}
+.swiper-slide {
+ text-align: center;
+ font-size: 18px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.main-scrollbar::-webkit-scrollbar {
+ width: 15px;
+ height: 10px;
+ position: relative;
+ left: 0;
+ top: 0;
+}
+
+.main-scrollbar::-webkit-scrollbar-track {
+ background: rgba(241, 241, 241, 0); /* Light track color */
+ border-radius: 10px;
+ position: absolute;
+}
+.main-scrollbar::-webkit-scrollbar-thumb:hover{
+    background: #ffffff4f;
+}
+.main-scrollbar::-webkit-scrollbar-thumb {
+ background: #ffffff1f; /* Darker thumb color */
+ border-radius: 10px;
+}
