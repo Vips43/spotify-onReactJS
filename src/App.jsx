@@ -17,7 +17,7 @@ function App() {
     <LeftAside />
     <div className="flex-1 max-w-4xl bg-black">
       <Routes>
-      <Route path="/" element={<ShowsDetails />} />
+      <Route path="/" element={<Main />} />
       <Route path="/album/:id" element={<ArtistAlbum />} />
       <Route path="/shows/:id" element={<ShowsDetails />} />
       <Route path="/albumTrack/:id" element={<AlbumTrack />} />

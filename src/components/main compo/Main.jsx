@@ -13,8 +13,8 @@ function Main() {
        <MainNavBtn />
       </div>
       <div className="z-0">
-       {/* <MainTopStrips />
-       <MainSlider /> */}
+       <MainTopStrips />
+       <MainSlider />
       </div>
      </div>
     </div>
