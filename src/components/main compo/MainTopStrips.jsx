@@ -31,7 +31,7 @@ function MainTopStrips() {
       >
        <div
         className="flex h-14 items-center gap-2 rounded-sm"
-        onClick={() => navigate(`/album/${s.id}`)}
+        onClick={() => navigate(`/artist/${s.id}`)}
         // onClick={()=> console.log(s.id)}
        >
         <img src={s.images[0].url} alt="" className="h-14 w-14" />

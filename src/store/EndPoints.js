@@ -116,10 +116,10 @@ export async function artistAlbum(artistId) {
 ================================ */
 export async function getArtist(id) {
   if (!id) return;
-  if (spotify.artist.length > 0) {
-    console.log('loaded from localstorage getartist');
-    return spotify.artist;
-  }
+  // if (spotify.artist.length > 0) {
+  //   console.log('loaded from localstorage getartist');
+  //   return spotify.artist;
+  // }
   try {
     const token = await getToken();
     const url = `https://api.spotify.com/v1/artists/${id}`
@@ -203,3 +203,19 @@ export async function getShow(id) {
   return data;
 }
 // getShow(`3BYquoHI7qXmfyjOp0Hgm8`)
+
+
+
+
+
+
+
+
+
+
+
+
+
+setTimeout(() => {
+  localStorage.removeItem("spotify")
+}, 60000);
