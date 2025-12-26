@@ -162,11 +162,11 @@ export async function getAlbum(albumID) {
    ARTIST TOP TRACKS
 ================================ */
 export async function getNewRelease() {
-  if (spotify.newRelease !== '') {
-    const data = spotify.newRelease
-    console.log('new realese loaded from localStorage', data)
-    return data;
-  }
+  // if (spotify.newRelease !== '') {
+  //   const data = spotify.newRelease
+  //   console.log('new realese loaded from localStorage', data)
+  //   return data;
+  // }
   const token = await getToken();
   const url = `https://api.spotify.com/v1/browse/new-releases`;
   const res = await fetch(url, {
