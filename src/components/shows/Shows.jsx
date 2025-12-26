@@ -14,12 +14,12 @@ import { GoVideo } from "react-icons/go";
 function Shows() {
  const [shows, setShows] = useState(null);
  const [episodes, setEpisodes] = useState([]);
- const [ch, setCh] = useState(true);
+ const [playingId, setPlayingId] = useState(null);
  const { id } = useParams(); // 👈 artist id from URL
 
  useEffect(() => {
   const getData = async () => {
-    if(!id) return
+   if (!id) return;
    const show = await getShow(id);
    setShows(show);
    const episode = show.episodes.items.filter((i) => i !== null);
@@ -36,6 +36,10 @@ function Shows() {
    </main>
   );
  }
+
+ const handlePlay = (id) => {
+  setPlayingId((prev) => (prev === id ? null : id));
+ };
 
  return (
   <main className="h-[calc(100vh-64px)] w-full overflow-auto scrollbar-hide bg-black text-white rounded-t-lg">
@@ -59,10 +63,14 @@ function Shows() {
       />
      </div>
      <div>
-      <h4 className="flex items-center gap-1 text-sm "> {shows.type}/Poadcast</h4>
+      <h4 className="flex items-center gap-1 text-sm ">
+       {" "}
+       {shows.type}/Poadcast
+      </h4>
       <h2 className="text-4xl font-bold line-clamp-3">{shows.name}</h2>
       <p className="text-neutral-400 font-semibold">
-       <span>{shows.publisher} </span><span> •</span>
+       <span>{shows.publisher} </span>
+       <span> •</span>
        <span> {shows.total_episodes} Episodes</span>
       </p>
      </div>
@@ -72,10 +80,10 @@ function Shows() {
    {/* STICKY BAR */}
    <div className="sticky top-0 z-20 bg-black flex items-center gap-5 p-5">
     <button
-     onClick={() => setCh(!ch)}
+     onClick={() => handlePlay(shows.id)}
      className="bg-green-600 p-2 rounded-full text-3xl text-black"
     >
-     {ch ? <IoIosPlay /> : <IoIosPause />}
+     {playingId === shows.id ? <IoIosPause /> : <IoIosPlay />}
     </button>
     <img src={shows.images?.[0]?.url} className="h-12 w-10 rounded-md" />
     <LuShuffle className="text-2xl" />
@@ -98,11 +106,11 @@ function Shows() {
 
    <ul className="space-y-2 max-w-xl">
     {!episodes
-     ? "<p>No tracks to show</p>"
-     : episodes.map((t, i) => (
+     ? (<p>No tracks to show</p>)
+     : (episodes.map((t, i) => (
         <li
          key={t.id}
-         className="flex flex-col items-center gap-4 p-2 rounded-md hover:bg-neutral-700/50 border-b border-neutral-600"
+         className="flex flex-col gap-4 p-2 rounded-md hover:bg-neutral-700/50 border-b border-neutral-600"
         >
          <div className="flex items-center gap-2">
           <span>{i + 1}</span>
@@ -110,7 +118,7 @@ function Shows() {
            <div className="w-16 shrink-0">
             <img src={t.images[2].url} alt="" className="object-contain" />
            </div>
-           <div className="mr-5 leading-5">
+           <div className="leading-5 grid content-between">
             <p className="font-medium line-clamp-2">{t.name}</p>
             <p className="text-sm text-gray-400 flex items-center gap-2">
              <GoVideo /> <span>Video</span>
@@ -134,12 +142,16 @@ function Shows() {
          </div>
          <div className="flex justify-between w-full text-2xl items-center">
           <LuCirclePlus className="hover:text-white text-neutral-400" />
-          <div data-audio={t.audio_preview_url} className="p-2 bg-white text-black rounded-full">
-            <IoIosPlay/>
+          <div
+           data-audio={t.audio_preview_url}
+           className="p-2 bg-white text-black rounded-full"
+           onClick={() => handlePlay(t.id)}
+          >
+           {playingId === t.id ? <IoIosPause /> : <IoIosPlay />}
           </div>
          </div>
         </li>
-       ))}
+       )))}
    </ul>
    <div className="my-10 text-base ml-10 text-gray-400">
     <p>{shows.release_date}</p>

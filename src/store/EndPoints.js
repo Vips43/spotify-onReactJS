@@ -30,7 +30,7 @@ export function formatTimeStampText(ms) {
 }
 
 let spotify = JSON.parse(localStorage.getItem("spotify")) || {
-  searchData: [], searchArtist: [], artistAlbum: [], artist: [], shows: [], artistTrack: [], getArtistTrack: [], showsObj: [], albumData: [], newRelease: [], showEpisode: [], getShow: []
+  searchArtist: [], artistAlbum: [], artist: [], shows: [], artistTrack: [], getArtistTrack: [], showsObj: [], albumData: [], newRelease: [], showEpisode: [], getShow: []
 }
 
 // localStorage.removeItem('shows')
@@ -54,9 +54,6 @@ export async function getSearch(query = 'tranding indian', t = "artist", limit =
       throw new Error(`Spotify API error: ${res.status}`);
     }
     const data = await res.json();
-    // spotify.searchData = data
-    console.log(data);
-    // saveData('getSearch')
     return data;
   } catch (err) {
     console.error("getSearch error:", err);

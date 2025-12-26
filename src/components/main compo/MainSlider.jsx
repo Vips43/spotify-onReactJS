@@ -11,6 +11,7 @@ function MainSlider() {
     <div className="grid gap-3">
         <NewReleases/>
         <CardSlider cardName={'Top Shows'} title={'top'} type={'show'} limit={20}/>
+        <CardSlider cardName={'friday special'} title={'friday special'} type={'show'} limit={20}/>
     </div>
    </main>
   </>
