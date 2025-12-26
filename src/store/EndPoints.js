@@ -3,11 +3,34 @@ import { getToken } from "./AuthToken";
 const saveData = (data) => {
   localStorage.setItem("spotify", JSON.stringify(spotify))
   console.log(`saved data '${data}' to localStorage`);
+}
+export function randomGradeints() {
+  const colors = ['gradient1', 'gradient2', 'gradient3', 'gradient4', 'gradient5'];
+  const randomCol = colors[Math.floor(Math.random() * colors.length)];
+  console.log(randomCol)
+  return randomCol
+}
 
+export function formatTimeStamp(ms) {
+  const totalSeconds = Math.floor(ms / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  const fMin = String(minutes).padStart(2, "0");
+  const fSec = String(seconds).padStart(2, "0");
+
+  return `${fMin}:${fSec}`;
+}
+export function formatTimeStampText(ms) {
+  const totalSeconds = Math.floor(ms / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  return `${minutes}min.${seconds}sec`;
 }
 
 let spotify = JSON.parse(localStorage.getItem("spotify")) || {
-  searchData: [], searchArtist: [], artistAlbum: [], artist: [], shows: [], artistTrack: [], getArtistTrack: [], showsObj: [], albumData: [], newRelease: []
+  searchData: [], searchArtist: [], artistAlbum: [], artist: [], shows: [], artistTrack: [], getArtistTrack: [], showsObj: [], albumData: [], newRelease: [], showEpisode: [], getShow: []
 }
 
 // localStorage.removeItem('shows')
@@ -160,3 +183,26 @@ export async function getNewRelease() {
   saveData('getNewRelease');
   return data;
 }
+/* ==============================
+            SHOWS 
+================================ */
+export async function getShow(id) {
+  // if (spotify.getShow !== '' || spotify.getShow?.length > 0) {
+  //   console.log('getShow loaded from localStorage', spotify.getShow)
+  //   return spotify.getShow;
+  // }
+  const token = await getToken();
+  const url = `https://api.spotify.com/v1/shows/${id}`;
+  const res = await fetch(url, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) {
+    throw new Error(`Spotify API error: ${res}`);
+  }
+  const data = await res.json();
+  spotify.getShow = data;
+  saveData('getShowEpi');
+  console.log(data)
+  return data;
+}
+// getShow(`3BYquoHI7qXmfyjOp0Hgm8`)

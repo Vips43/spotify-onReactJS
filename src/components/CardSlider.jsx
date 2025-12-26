@@ -13,11 +13,6 @@ function CardSlider({ cardName, title, type, limit }) {
  const resKey = type === "show" ? "shows" : `${type}`;
 
  useEffect(() => {
-  //   if (spotify.shows !== '' || spotify.shows !== null) {
-  //    console.log("shows loaded from local");
-  //    setData(spotify.shows);
-  //    return;
-  //   }
   const getData = async () => {
    try {
     const searched = await getSearch(title, type, limit);
@@ -51,18 +46,14 @@ function CardSlider({ cardName, title, type, limit }) {
      {loading ? (
       <p>Loading...</p>
      ) : (
-      data.map((artist) => (
+      data.map((d) => (
        <SwiperSlide
-        key={artist.id}
+        key={d.id}
         className="w-44! rounded-lg"
-        data-id={artist.id}
-        onClick={() =>
-         resKey == "artist" || resKey == "album"
-          ? navigate(`/album/${artist.id}`)
-          : navigate(`/shows/${artist.id}`)
-        }
+        data-id={d.id}
+        onClick={() => navigate(`/shows/${d.id}`)}
        >
-        <Card img_url={artist.images[0].url} title={artist.name} />
+        <Card img_url={d.images[0].url} title={d.name} />
        </SwiperSlide>
       ))
      )}

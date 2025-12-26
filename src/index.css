@@ -56,8 +56,8 @@
  width: 100%;
  height: 100%;
 }
-.swiper-slide:hover{
-    background-color: #202020d8;
+.swiper-slide:hover {
+ background-color: #202020d8;
 }
 .swiper-slide {
  text-align: center;
@@ -80,10 +80,33 @@
  border-radius: 10px;
  position: absolute;
 }
-.main-scrollbar::-webkit-scrollbar-thumb:hover{
-    background: #ffffff4f;
+.main-scrollbar::-webkit-scrollbar-thumb:hover {
+ background: #ffffff4f;
 }
 .main-scrollbar::-webkit-scrollbar-thumb {
  background: #ffffff1f; /* Darker thumb color */
  border-radius: 10px;
+}
+
+/*   gradients    */
+.gradient1 {
+ background-image: linear-gradient(to bottom, rgb(148, 126, 2), black);
+}
+.gradient2 {
+ background-image: linear-gradient(to bottom, rgb(148, 2, 2), black);
+}
+.gradient3 {
+ background-image: linear-gradient(to bottom, rgb(148, 85, 2), black);
+}
+.gradient4 {
+ background-image: linear-gradient(to bottom, rgb(2, 148, 51), black);
+}
+.gradient5 {
+ background-image: linear-gradient(to bottom, rgb(148, 2, 104), black);
+}
+.gradient6 {
+ background-image: linear-gradient(to bottom, rgb(148, 2, 2), black);
+}
+.gradient7 {
+ background-image: linear-gradient(to bottom, rgb(2, 119, 148), black);
 }
