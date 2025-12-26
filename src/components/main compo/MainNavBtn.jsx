@@ -17,7 +17,7 @@ function MainNavBtn() {
 
  return (
   <>
-   <div className="bg-[#2e0808] px-8 py-5 rounded-t-lg sticky top-0">
+   <div className="px-8 py-5 rounded-t-lg">
     <div className="flex items-center gap-2">
      <button className={btnClass("All")} onClick={() => btnHandle('All')}>
       All

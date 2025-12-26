@@ -217,5 +217,5 @@ export async function getShow(id) {
 
 
 setTimeout(() => {
-  localStorage.removeItem("spotify")
+  localStorage.removeItem("token")
 }, 60000);

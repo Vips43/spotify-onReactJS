@@ -1,34 +1,29 @@
-const client_ID = `ae099a85abfd490f942ad96cecc1e3fe`;
-const client_Secret = `08929370795044bb9726eccb1421c08c`;
+let cachedToken = localStorage.getItem("spotify_token") || null;
+let tokenExpiry = Number(localStorage.getItem("spotify_token_expiry")) || 0;
 
-const tokens = JSON.parse(localStorage.getItem("tokens")) || []
+const clientId = `ae099a85abfd490f942ad96cecc1e3fe`;
+const clientSecret = `08929370795044bb9726eccb1421c08c`;
+
 export async function getToken() {
-    const now = new Date()
-    if (tokens.length > 0) {
-        console.log('token fetched from arra');
-        return tokens;
-    } else {
+  const now = Date.now()
 
-        try {
-            const response = await fetch('https://accounts.spotify.com/api/token', {
-                method: "POST",
-                headers: {
-                    'Content-Type': "application/x-www-form-urlencoded",
-                    Authorization: `Basic ${btoa(`${client_ID}:${client_Secret}`)}`,
-                },
-                body: "grant_type=client_credentials",
-            });
-            if (!response.ok) console.log(response.status);
+  if (cachedToken && now < tokenExpiry) return cachedToken;
 
-            const data = await response.json();
-            let token = data.access_token
-            tokens.push(token)
+  const result = await fetch("https://accounts.spotify.com/api/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Authorization":
+        "Basic " + btoa(`${clientId}:${clientSecret}`),
+    },
+    body: "grant_type=client_credentials",
+  });
+  const data = await result.json();
 
-            console.log('token fetched from api');
-            localStorage.setItem('tokens', JSON.stringify(tokens))
-            return data.access_token;
-        } catch (err) {
-            console.log('there is an error: ', err);
-        }
-    }
+  cachedToken = data.access_token;
+  tokenExpiry = now + data.expires_in * 1000;
+  localStorage.setItem("spotify_token", cachedToken);
+  localStorage.setItem("spotify_token_expiry", tokenExpiry);
+
+  return cachedToken;
 }

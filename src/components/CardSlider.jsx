@@ -52,6 +52,7 @@ function CardSlider({ cardName, title, type, limit }) {
                 <Card
                   img_url={d.images?.[0]?.url}
                   title={d.name}
+                  type={type}
                 />
               </SwiperSlide>
             ))

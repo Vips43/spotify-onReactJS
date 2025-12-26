@@ -1,20 +1,13 @@
-import { useEffect, useState } from "react";
-import { MdVerified } from "react-icons/md";
-import { IoIosPlay, IoIosPause } from "react-icons/io";
-import { LuShuffle, LuCirclePlus } from "react-icons/lu";
-import { BsThreeDots } from "react-icons/bs";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
- formatTimeStamp,
- formatTimeStampText,
- getShow,
-} from "../../store/EndPoints";
-import { GoVideo } from "react-icons/go";
+import { getShow } from "../../store/EndPoints";
+import EpisodesLi from "./EpisodesLi";
 
 function Shows() {
+ const mainRef = useRef(null);
+ const [isSticky, setIsSticky] = useState(false);
  const [shows, setShows] = useState(null);
  const [episodes, setEpisodes] = useState([]);
- const [playingId, setPlayingId] = useState(null);
  const { id } = useParams(); // 👈 artist id from URL
 
  useEffect(() => {
@@ -24,7 +17,6 @@ function Shows() {
    setShows(show);
    const episode = show.episodes.items.filter((i) => i !== null);
    setEpisodes(episode);
-   console.log(shows);
   };
   getData();
  }, []);
@@ -37,12 +29,13 @@ function Shows() {
   );
  }
 
- const handlePlay = (id) => {
-  setPlayingId((prev) => (prev === id ? null : id));
+ const handleScroll = () => {
+  if (!mainRef.current) return;
+  setIsSticky(mainRef.current.scrollTop > 750);
  };
 
  return (
-  <main className="h-[calc(100vh-64px)] w-full overflow-auto scrollbar-hide bg-black text-white rounded-t-lg">
+  <main className="h-[calc(100vh-64px)] w-full overflow-auto scrollbar-hide bg-black text-white rounded-t-lg" ref={mainRef} onScroll={handleScroll} >
    {/* HEADER */}
    <div
     className="h-70 flex items-end lg:bg-top!"
@@ -77,23 +70,9 @@ function Shows() {
     </div>
    </div>
 
-   {/* STICKY BAR */}
-   <div className="sticky top-0 z-20 bg-black flex items-center gap-5 p-5">
-    <button
-     onClick={() => handlePlay(shows.id)}
-     className="bg-green-600 p-2 rounded-full text-3xl text-black"
-    >
-     {playingId === shows.id ? <IoIosPause /> : <IoIosPlay />}
-    </button>
-    <img src={shows.images?.[0]?.url} className="h-12 w-10 rounded-md" />
-    <LuShuffle className="text-2xl" />
-    <div className="px-3 py-1 border rounded-full text-sm">Follow</div>
-    <BsThreeDots className="text-2xl" />
-   </div>
-
    {/* TRACKS */}
    <div>
-    <p className="flex items-center justify-center gap-10 text-lg font-semibold underline">
+    <p className="flex items-center justify-center gap-10 text-lg font-semibold underline py-5 bg-black sticky top-0">
      <span>Description</span>
      <span>Transcript</span>
     </p>
@@ -104,55 +83,8 @@ function Shows() {
     ></div>
    </div>
 
-   <ul className="space-y-2 max-w-xl">
-    {!episodes
-     ? (<p>No tracks to show</p>)
-     : (episodes.map((t, i) => (
-        <li
-         key={t.id}
-         className="flex flex-col gap-4 p-2 rounded-md hover:bg-neutral-700/50 border-b border-neutral-600"
-        >
-         <div className="flex items-center gap-2">
-          <span>{i + 1}</span>
-          <div className="flex gap-2">
-           <div className="w-16 shrink-0">
-            <img src={t.images[2].url} alt="" className="object-contain" />
-           </div>
-           <div className="leading-5 grid content-between">
-            <p className="font-medium line-clamp-2">{t.name}</p>
-            <p className="text-sm text-gray-400 flex items-center gap-2">
-             <GoVideo /> <span>Video</span>
-             <span>•</span>
-             <span>{shows.publisher}</span>
-            </p>
-           </div>
-          </div>
-         </div>
-         <div className="text-neutral-400 text-sm">
-          <p className="line-clamp-2">{t.description}</p>
-          <p className="text-white space-x-2 font-mono">
-           <span>
-            {new Date(t.release_date).toLocaleString("en-us", {
-             weekday: "long",
-            })}
-           </span>
-           <span>•</span>
-           <span>{formatTimeStampText(t.duration_ms)}</span>
-          </p>
-         </div>
-         <div className="flex justify-between w-full text-2xl items-center">
-          <LuCirclePlus className="hover:text-white text-neutral-400" />
-          <div
-           data-audio={t.audio_preview_url}
-           className="p-2 bg-white text-black rounded-full"
-           onClick={() => handlePlay(t.id)}
-          >
-           {playingId === t.id ? <IoIosPause /> : <IoIosPlay />}
-          </div>
-         </div>
-        </li>
-       )))}
-   </ul>
+   <EpisodesLi episodes={episodes} shows={shows} isSticky={isSticky} />
+
    <div className="my-10 text-base ml-10 text-gray-400">
     <p>{shows.release_date}</p>
     {shows?.copyrights?.map((copy, i) => (

@@ -9,7 +9,7 @@ function Main() {
    <main className="w-full bg-black h-[calc(100vh-64px)] text-white overflow-auto scrollbar-hide rounded-t-lg">
     <div className="rounded-t-lg maroon-gradient-dark w-full h-full">
      <div className="">
-      <div className="sticky top-0 bg-[#2e0808] z-10">
+      <div className="bg-[#2e0808] sticky top-0 z-50">
        <MainNavBtn />
       </div>
       <div className="z-0">

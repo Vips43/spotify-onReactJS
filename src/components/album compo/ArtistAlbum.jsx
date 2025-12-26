@@ -23,33 +23,22 @@ function ArtistAlbum() {
  }, []);
  return (
   <>
-   <main className="h-[calc(100vh-4rem)] bg-black">
-    <div className="h-full overflow-auto relative scrollbar-hide">
+   <main className="h-[calc(100vh-4rem)] bg-black rounded-t-lg">
+    <div className="h-full overflow-auto relative scrollbar-hide rounded-t-lg">
      <div style={{ background: `url(${artist.images?.[0]?.url})` }}>
-     <div
-      className="h-72 flex items-end font-black text-4xl"
-     >
-      <div className="p-5 text-gray-200">
-       <h4 className="text-sm font-normal flex items-center gap-1 ">
-        <MdVerified className="fill-blue-500" /> Verified Artist
-       </h4>
-       <h4>{artist.name}</h4>
-       <h4 className="text-lg font-normal">{artist.followers?.total} ,Followers</h4>
+      <div className="h-72 flex items-end font-black text-4xl">
       </div>
-     </div>
-     <div className="sticky top-0 z-10 bg-black/20 w-full flex items-center gap-5 p-5 text-white">
-      <button className="bg-green-600 p-2 rounded-full text-3xl text-black">
-       <IoIosPlay />
-      </button>
-      <img
-       src={artist.images?.[2]?.url}
-       alt=""
-       className="h-12 w-10 bg-white p-0.5 rounded-md"
-      />
-      <LuShuffle className="text-2xl" />
-      <div className="px-3 py-1 border rounded-full text-sm">Follow</div>
-      <BsThreeDots className="text-white text-2xl" />
-     </div>
+      <div className="sticky top-0 z-10 bg-black/20 w-full flex items-center gap-5 p-5 text-white">
+       <div className="p-5 text-gray-200">
+        <h4 className="text-sm font-normal flex items-center gap-1 ">
+         <MdVerified className="fill-blue-500" /> Verified Artist
+        </h4>
+        <h4>{artist.name}</h4>
+        <h4 className="text-lg font-normal">
+         {artist.followers?.total} ,Followers
+        </h4>
+       </div>
+      </div>
      </div>
      <div className="h-full">
       <h3 className="text-2xl font-bold ">Popular</h3>

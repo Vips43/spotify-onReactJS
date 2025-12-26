@@ -22,12 +22,12 @@ function MainTopStrips() {
 
  return (
   <>
-   <div className="mx-8">
+   <div className="mx-8 z-0 w-fit">
     <ul className="grid grid-cols-2 xl:grid-cols-4 gap-2">
      { loading? <p className="text-center text-2xl">Loading...</p> : artist.map((s) => (
       <li
        key={s.id}
-       className="bg-gray-500/35 max-w-3xs rounded-sm overflow-hidden z-50 "
+       className="bg-gray-500/35 max-w-3xs rounded-sm overflow-hidden z-50 min-w-36 sm:min-w-56 md:w-3xs"
       >
        <div
         className="flex h-14 items-center gap-2 rounded-sm"

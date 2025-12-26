@@ -12,7 +12,7 @@ function MainSlider() {
         <NewReleases/>
         <CardSlider cardName={'Top Shows'} title={'top'} type={'show'} limit={20}/>
         <CardSlider cardName={'friday special'} title={'friday special'} type={'show'} limit={20}/>
-        <CardSlider cardName={'friday special'} title={'top rajsthani'} type={'artist'} limit={20}/>
+        <CardSlider cardName={'Rajsthani artist'} title={'top rajsthani'} type={'artist'} limit={20}/>
     </div>
    </main>
   </>
