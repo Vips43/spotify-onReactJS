@@ -18,6 +18,7 @@ function CardSlider({ cardName, title, type, limit }) {
         const searched = await getSearch(title, type, limit);
         const items = searched?.[resKey]?.items || [];
         setData(items);
+        console.log('eee',items)
       } catch (error) {
         console.error("Error fetching:", error);
         setData([]);

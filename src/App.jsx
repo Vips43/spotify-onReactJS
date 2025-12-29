@@ -14,7 +14,7 @@ function App() {
    <Navbar />
    <div className="flex h-[calc(100vh-64px)]">
     <LeftAside />
-    <div className="flex-1 bg-black relative mr-10 md:mr-28">
+    <div className="flex-1 bg-black relative mr-10 md:mr-28 lg:mr-64">
       <Routes>
       <Route path="/" element={<Main />} />
       <Route path="/show/:id" element={<Shows />} />

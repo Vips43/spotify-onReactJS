@@ -25,7 +25,7 @@ function ArtistAlbum() {
   <>
    <main className="h-[calc(100vh-4rem)] bg-black rounded-t-lg">
     <div className="h-full overflow-auto relative scrollbar-hide rounded-t-lg">
-     <div style={{ background: `url(${artist.images?.[0]?.url})` }}>
+     <div style={{ background: `url(${artist.images?.[0]?.url})`,backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center' }} className="h-96 w-full relative">
       <div className="h-72 flex items-end font-black text-4xl">
       </div>
       <div className="sticky top-0 z-10 bg-black/20 w-full flex items-center gap-5 p-5 text-white">

@@ -21,6 +21,7 @@ export function formatTimeStamp(ms) {
 
   return `${fMin}:${fSec}`;
 }
+
 export function formatTimeStampText(ms) {
   const totalSeconds = Math.floor(ms / 1000);
   const minutes = Math.floor(totalSeconds / 60);
@@ -202,20 +203,4 @@ export async function getShow(id) {
   console.log(data)
   return data;
 }
-// getShow(`3BYquoHI7qXmfyjOp0Hgm8`)
 
-
-
-
-
-
-
-
-
-
-
-
-
-setTimeout(() => {
-  localStorage.removeItem("token")
-}, 60000);

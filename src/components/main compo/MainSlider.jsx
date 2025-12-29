@@ -10,9 +10,9 @@ function MainSlider() {
    <main className="my-5">
     <div className="grid gap-3">
         <NewReleases/>
-        <CardSlider cardName={'Top Shows'} title={'top'} type={'show'} limit={20}/>
-        <CardSlider cardName={'friday special'} title={'friday special'} type={'show'} limit={20}/>
-        <CardSlider cardName={'Rajsthani artist'} title={'top rajsthani'} type={'artist'} limit={20}/>
+        <CardSlider cardName={'Top motivated'} title={'animes'} type={'show'} limit={20}/>
+        <CardSlider cardName={'friday special'} title={'tuesday special'} type={'show'} limit={20}/>
+        <CardSlider cardName={'Rajsthani artist'} title={'best hariyanvi'} type={'artist'} limit={20}/>
     </div>
    </main>
   </>

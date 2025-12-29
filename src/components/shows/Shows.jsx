@@ -31,11 +31,15 @@ function Shows() {
 
  const handleScroll = () => {
   if (!mainRef.current) return;
-  setIsSticky(mainRef.current.scrollTop > 750);
+  setIsSticky(mainRef.current.scrollTop > 150);
  };
 
  return (
-  <main className="h-[calc(100vh-64px)] w-full overflow-auto scrollbar-hide bg-black text-white rounded-t-lg" ref={mainRef} onScroll={handleScroll} >
+  <main
+   className="h-[calc(100vh-64px)] max-w-3xl overflow-auto scrollbar-hide bg-black text-white rounded-t-lg"
+   ref={mainRef}
+   onScroll={handleScroll}
+  >
    {/* HEADER */}
    <div
     className="h-70 flex items-end lg:bg-top!"
@@ -69,9 +73,22 @@ function Shows() {
      </div>
     </div>
    </div>
+   <div className="text-2xl font-semibold py-3 sticky top-0 bg-black flex gap-5 items-center">
+    <h4
+     className={`transition-all duration-300 ease-out
+        ${
+         isSticky
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 -translate-y-4 pointer-events-none"
+        }
+      `}
+    >
+     {shows.name}
+    </h4>
+   </div>
 
    {/* TRACKS */}
-   <div>
+   <div className="my-5">
     <p className="flex items-center justify-center gap-10 text-lg font-semibold underline py-5 bg-black sticky top-0">
      <span>Description</span>
      <span>Transcript</span>

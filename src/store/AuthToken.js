@@ -19,9 +19,9 @@ export async function getToken() {
     body: "grant_type=client_credentials",
   });
   const data = await result.json();
-
   cachedToken = data.access_token;
   tokenExpiry = now + data.expires_in * 1000;
+  console.log(data)
   localStorage.setItem("spotify_token", cachedToken);
   localStorage.setItem("spotify_token_expiry", tokenExpiry);
 
