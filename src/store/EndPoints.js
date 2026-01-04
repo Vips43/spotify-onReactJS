@@ -59,12 +59,12 @@ let spotify = JSON.parse(localStorage.getItem("spotify")) || {
    SEARCH
 ================================ */
 
-export async function getSearch(query = 'tranding indian', t = "track", limit = 20) {
+export async function getSearch(query = 'tranding indian', t = "track", limit = 20,offset=0) {
   try {
     const token = await getToken();
     const type = t
     const uri = `https://api.spotify.com/v1/search?q=${encodeURIComponent(
-      query)}&type=${type}&limit=${limit}`;
+      query)}&type=${type}&limit=${limit}&offset=${offset}`;
     const res = await fetch(uri, {
       headers: {
         Authorization: `Bearer ${token}`,

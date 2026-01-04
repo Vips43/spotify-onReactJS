@@ -16,7 +16,7 @@ function MainSlider() {
         <CardSlider cardName={'Top motivated'} title={'animes'} type={'show'} limit={20}/>
         <CardSlider cardName={`${todays} special`} title={`${todays} special`} type={'show'} limit={20}/>
         <CardSlider cardName={'Rajsthani artist'} title={'best hariyanvi'} type={'artist'} limit={20}/>
-        <Songs todays={todays} query={`${todays} special`} type={'track'} limit={6}/>
+        <Songs todays={todays} query={`${todays} special`} type={'track'} limit={3}/>
 
     </div>
    </main>
