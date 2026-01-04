@@ -13,23 +13,42 @@ export function randomGradeints() {
 
 export function formatTimeStamp(ms) {
   const totalSeconds = Math.floor(ms / 1000);
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
 
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  const fHour = String(hours).padStart(2, "0");
   const fMin = String(minutes).padStart(2, "0");
   const fSec = String(seconds).padStart(2, "0");
+  if (hours > 0) {
+    return `${fHour}:${fMin}:${fSec}`;
+  }
 
   return `${fMin}:${fSec}`;
 }
+
+
+const date = new Date(5667520);
 
 export function formatTimeStampText(ms) {
   const totalSeconds = Math.floor(ms / 1000);
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
+  if (minutes > 59) {
+    const hours = Math.floor(minutes / 60);
+    const remMinutes = minutes % 60;
+    return `${hours}hr.${remMinutes}min.`;
+  }
 
   return `${minutes}min.${seconds}sec`;
 }
 
+export function today(){
+  const now = new Date();
+  const day=[ 'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][now.getDay()];
+  return day;
+}
+today()
 let spotify = JSON.parse(localStorage.getItem("spotify")) || {
   searchArtist: [], artistAlbum: [], artist: [], shows: [], artistTrack: [], getArtistTrack: [], showsObj: [], albumData: [], newRelease: [], showEpisode: [], getShow: []
 }
@@ -40,7 +59,7 @@ let spotify = JSON.parse(localStorage.getItem("spotify")) || {
    SEARCH
 ================================ */
 
-export async function getSearch(query = 'tranding indian', t = "artist", limit = 20) {
+export async function getSearch(query = 'tranding indian', t = "track", limit = 20) {
   try {
     const token = await getToken();
     const type = t
@@ -55,6 +74,7 @@ export async function getSearch(query = 'tranding indian', t = "artist", limit =
       throw new Error(`Spotify API error: ${res.status}`);
     }
     const data = await res.json();
+    console.log(data)
     return data;
   } catch (err) {
     console.error("getSearch error:", err);
@@ -132,7 +152,6 @@ export async function getArtist(id) {
     const data = await res.json();
     spotify.artist = data
     saveData('getArtist')
-    console.log(spotify.artist)
     return data
   } catch (err) {
     console.error("there is an error in getArtist:", err);
@@ -153,7 +172,6 @@ export async function getAlbum(albumID) {
     throw new Error(`Spotify API error: ${res}`);
   }
   const data = await res.json();
-  console.log(data);
   spotify.albumData = data
   saveData("getAlbum")
   return data;
@@ -163,11 +181,10 @@ export async function getAlbum(albumID) {
    ARTIST TOP TRACKS
 ================================ */
 export async function getNewRelease() {
-  // if (spotify.newRelease !== '') {
-  //   const data = spotify.newRelease
-  //   console.log('new realese loaded from localStorage', data)
-  //   return data;
-  // }
+  if (spotify.newRelease !== '') {
+    const data = spotify.newRelease;
+    return data;
+  }
   const token = await getToken();
   const url = `https://api.spotify.com/v1/browse/new-releases`;
   const res = await fetch(url, {

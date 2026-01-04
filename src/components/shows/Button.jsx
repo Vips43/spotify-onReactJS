@@ -5,7 +5,7 @@ function Button({ isPlaying, onClick, clr }) {
  return (
   <>
    <button
-    className={`p-2 bg-${clr} text-black rounded-full`}
+    className={`p-2 bg-${clr} text-black rounded-full cursor-pointer`}
     onClick={onClick}
    >
     {isPlaying ? <IoIosPause /> : <IoIosPlay />}

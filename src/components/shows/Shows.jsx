@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getShow } from "../../store/EndPoints";
 import EpisodesLi from "./EpisodesLi";
+import { useMyStore } from "../../store/store";
 
 function Shows() {
  const mainRef = useRef(null);
@@ -9,6 +10,8 @@ function Shows() {
  const [shows, setShows] = useState(null);
  const [episodes, setEpisodes] = useState([]);
  const { id } = useParams(); // 👈 artist id from URL
+ const setDescExpand = useMyStore((state) => state.setDescExpand);
+ const descExp = useMyStore((state) => state.descExp);
 
  useEffect(() => {
   const getData = async () => {
@@ -61,7 +64,6 @@ function Shows() {
      </div>
      <div>
       <h4 className="flex items-center gap-1 text-sm ">
-       {" "}
        {shows.type}/Poadcast
       </h4>
       <h2 className="text-4xl font-bold line-clamp-3">{shows.name}</h2>
@@ -90,14 +92,19 @@ function Shows() {
    {/* TRACKS */}
    <div className="my-5">
     <p className="flex items-center justify-center gap-10 text-lg font-semibold underline py-5 bg-black sticky top-0">
-     <span>Description</span>
-     <span>Transcript</span>
+     <span className="cursor-pointer select-none" onClick={() => setDescExpand()}>
+      Description
+     </span>
+     <span className="cursor-pointer select-none">Transcript</span>
     </p>
     <div
+     className={`${descExp ? "line-clamp-3" : "line-clamp-none" }`}
      dangerouslySetInnerHTML={{
       __html: shows.html_description,
      }}
-    ></div>
+    >
+      
+    </div>
    </div>
 
    <EpisodesLi episodes={episodes} shows={shows} isSticky={isSticky} />

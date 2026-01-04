@@ -3,7 +3,6 @@ import MainTopStrips from "./MainTopStrips";
 import MainSlider from "./MainSlider";
 
 function Main() {
-
  return (
   <>
    <main className="w-full bg-black h-[calc(100vh-64px)] text-white overflow-auto scrollbar-hide rounded-t-lg">

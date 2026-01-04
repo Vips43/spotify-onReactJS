@@ -85,10 +85,10 @@ function EpisodesLi({ episodes, shows, isSticky }) {
         </div>
 
         {/* ACTIONS */}
-        <div className="flex justify-between items-center text-2xl mt-3">
-         <LuCirclePlus className="hover:text-white text-neutral-400" />
+        <div className="flex justify-between items-center text-2xl mt-3 ">
+         <LuCirclePlus className="hover:text-white text-neutral-400 " />
 
-         <Button
+         <Button 
           isPlaying={playingId === t.id}
           onClick={() => handlePlay(t.id, t.audio_preview_url)}
           url={t}
