@@ -32,10 +32,9 @@ function MainTopStrips() {
        <div
         className="flex h-14 items-center gap-2 rounded-sm"
         onClick={() => navigate(`/artist/${s.id}`)}
-        // onClick={()=> console.log(s.id)}
        >
         <img src={s.images[0].url} alt="" className="h-14 w-14" />
-        <h3 className="text-sm font-semibold truncate">{s.name}</h3>
+        <h3 className="text-sm font-semibold line-clamp-1">{s.name}</h3>
        </div>
       </li>
      ))}

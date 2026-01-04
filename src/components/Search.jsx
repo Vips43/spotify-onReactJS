@@ -13,7 +13,7 @@ function Search() {
  }
 
  return (
-  <main className="w-full h-full overflow-auto scrollbar-hide">
+  <main className="w-[calc(100vw-6rem)] h-full overflow-auto scrollbar-hide">
    {/* Albums */}
    <div className="w-full">
     <h3 className="my-4 text-2xl font-bold text-white">Albums</h3>
