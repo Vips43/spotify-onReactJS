@@ -14,7 +14,7 @@ function App() {
    <Navbar />
    <div className="flex h-[calc(100vh-64px)] w-[calc(100vw-6rem)]">
     <LeftAside />
-    <div className="flex-1 bg-black relative max-w-full mr-10 md:mr-28 lg:mr-64">
+    <div className="flex-1 bg-black relative max-w-full mr-5 md:mr-28 lg:mr-64">
       <Routes>
       <Route path="/" element={<Main />} />
       <Route path="/search/:query" element={<Search />} />
