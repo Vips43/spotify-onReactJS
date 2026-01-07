@@ -181,10 +181,6 @@ export async function getAlbum(albumID) {
    ARTIST TOP TRACKS
 ================================ */
 export async function getNewRelease() {
-  if (spotify.newRelease !== '') {
-    const data = spotify.newRelease;
-    return data;
-  }
   const token = await getToken();
   const url = `https://api.spotify.com/v1/browse/new-releases`;
   const res = await fetch(url, {
@@ -202,10 +198,6 @@ export async function getNewRelease() {
             SHOWS 
 ================================ */
 export async function getShow(id) {
-  // if (spotify.getShow !== '' || spotify.getShow?.length > 0) {
-  //   console.log('getShow loaded from localStorage', spotify.getShow)
-  //   return spotify.getShow;
-  // }
   const token = await getToken();
   const url = `https://api.spotify.com/v1/shows/${id}`;
   const res = await fetch(url, {
